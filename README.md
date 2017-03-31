@@ -2,7 +2,7 @@
 
 RxJava Beginner Example
 
-```
+```java
 // prework, the <String> can translate to <whatever> you want
 Observer<String> observer = new Observer<String>() {
 @Override
