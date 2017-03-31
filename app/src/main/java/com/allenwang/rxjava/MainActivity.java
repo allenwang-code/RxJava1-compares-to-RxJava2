@@ -18,6 +18,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 import io.reactivex.subscribers.ResourceSubscriber;
 
 public class MainActivity extends AppCompatActivity {
@@ -163,6 +164,13 @@ public class MainActivity extends AppCompatActivity {
         CompositeDisposable composite2 = new CompositeDisposable();
         composite2.add(Flowable.just("subscriber composite2 next1").subscribeWith(stringResourceSubscriber));
 
+
+        Consumer<String> consumer = new Consumer<String>() {
+            @Override
+            public void accept(@NonNull String s) throws Exception {
+                
+            }
+        }
 
     }
 }
