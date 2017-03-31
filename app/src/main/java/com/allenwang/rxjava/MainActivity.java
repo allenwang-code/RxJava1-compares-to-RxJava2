@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // prework, the <String> can translate to <whatever> you want
+        // observer pre-work, the <String> can translate to <whatever> you want
         Observer<String> observer = new Observer<String>() {
             @Override
             public void onSubscribe(Disposable d) {
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         o3.subscribe(observer);
 
 
-        // general speaking, it is same as observer
+        // subscriber example1, general speaking, it do the same work as observer here
         Subscriber<String> subscriber = new Subscriber<String>() {
             @Override
             public void onSubscribe(Subscription s) {
@@ -108,15 +108,14 @@ public class MainActivity extends AppCompatActivity {
         /** RxJava 1 **/
         //o1.subscribe(subscriber);
         /** RxJava 2 **/
-        //way1
         Flowable.just("subscriber next1").subscribe(subscriber); // onError may not work at RxJava2
         Flowable.just("subscriber next2").safeSubscribe(subscriber);
 
-        //way2
-        ResourceSubscriber<Integer> resourceSubscriber = new ResourceSubscriber<Integer>() {
+        // subscriber  example1
+        ResourceSubscriber<Integer> integerResourceSubscriber = new ResourceSubscriber<Integer>() {
             @Override
             public void onStart() {
-                request(2);
+                request(Integer.MAX_VALUE);
             }
 
             @Override
@@ -134,8 +133,36 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("Done");
             }
         };
+
+        CompositeDisposable composite1 = new CompositeDisposable();
+        composite1.add(Flowable.range(0, 52).subscribeWith(integerResourceSubscriber));
+
+        // subscriber example2
+        ResourceSubscriber<String> stringResourceSubscriber = new ResourceSubscriber<String>() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onNext(String s) {
+                System.out.println(s);
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                t.printStackTrace();
+            }
+
+            @Override
+            public void onComplete() {
+                System.out.println("Done");
+            }
+        };
+
         CompositeDisposable composite2 = new CompositeDisposable();
-        composite2.add(Flowable.range(0, 52).subscribeWith(resourceSubscriber));
+        composite2.add(Flowable.just("subscriber composite2 next1").subscribeWith(stringResourceSubscriber));
+
 
     }
 }
