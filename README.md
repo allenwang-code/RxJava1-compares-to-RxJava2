@@ -1,5 +1,6 @@
 # RxJava1-compares-to-RxJava2
 #### Follow the guide here, http://gank.io/post/560e15be2dca930e00da1083
+#### Reference, https://github.com/ReactiveX/RxJava/wiki/What's-different-in-2.0
 
 | description | RxJava 1.X | RxJava 2.X |
 | ----- | ----- | ----- |
@@ -160,3 +161,35 @@ composite2.add(Flowable.just("subscriber composite2 next1").subscribeWith(string
 
 ```
 
+## Action0, Action1, Action2
+// originally called Action1
+Consumer<String> onNext = new Consumer<String>() {
+@Override
+public void accept(@NonNull String s) throws Exception {
+Log.d(TAG, s);
+}
+};
+
+Consumer<Throwable> onError = new Consumer<Throwable>() {
+
+@Override
+public void accept(@NonNull Throwable s) throws Exception {
+
+}
+};
+
+// originally called Action0
+Action onCompletedAction = new Action() {
+@Override
+public void run() throws Exception {
+Log.d(TAG, "completed");
+}
+};
+
+// o1 is the Observable
+o1.subscribe(onNext);
+o1.subscribe(onNext, onError);
+o1.subscribe(onNext, onError, onCompletedAction);
+
+```java
+```
