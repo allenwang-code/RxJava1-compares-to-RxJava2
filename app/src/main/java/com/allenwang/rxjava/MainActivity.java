@@ -2,6 +2,7 @@ package com.allenwang.rxjava;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
@@ -22,6 +23,7 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.subscribers.ResourceSubscriber;
 
 public class MainActivity extends AppCompatActivity {
+    private final static String TAG = MainActivity.class.getCanonicalName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,13 +166,32 @@ public class MainActivity extends AppCompatActivity {
         CompositeDisposable composite2 = new CompositeDisposable();
         composite2.add(Flowable.just("subscriber composite2 next1").subscribeWith(stringResourceSubscriber));
 
-
-        Consumer<String> consumer = new Consumer<String>() {
+        // originally called Action1
+        Consumer<String> onNext = new Consumer<String>() {
             @Override
             public void accept(@NonNull String s) throws Exception {
-                
+                Log.d(TAG, s);
             }
-        }
+        };
 
+        Consumer<Throwable> onError = new Consumer<Throwable>() {
+
+            @Override
+            public void accept(@NonNull Throwable s) throws Exception {
+
+            }
+        };
+
+        // originally called Action0
+        Action onCompletedAction = new Action() {
+            @Override
+            public void run() throws Exception {
+                Log.d(TAG, "completed");
+            }
+        };
+
+        o1.subscribe(onNext);
+        o1.subscribe(onNext, onError);
+        o1.subscribe(onNext, onError, onCompletedAction);
     }
 }
