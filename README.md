@@ -1,5 +1,5 @@
-# RxJavaExample
-### Follow the guide here, http://gank.io/post/560e15be2dca930e00da1083
+# RxJava1-compares-to-RxJava2
+#### Follow the guide here, http://gank.io/post/560e15be2dca930e00da1083
 
 | description | RxJava 1.X | RxJava 2.X |
 | ----- | ----- | ----- |
