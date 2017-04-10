@@ -9,7 +9,7 @@
 |`Schedulers`| `Schedulers.immediate()`<br>`Schedulers.trampoline()`<br>`Schedulers.computation()`<br>`Schedulers.newThread()`<br>`Schedulers.io()`<br>`Schedulers.from(executor)`<br>`AndroidSchedulers.mainThread()` | remove`Schedulers.immediate()`<br>add`Schedulers.single()`<br> |
 |`Single`| The action is like`Observable`, but only launch a`onSuccess`or`onError` | follow the rule of`Reactive Streams`, `onSubscribe(onSuccess/onError)` |
 |`Completable`| The action is like`Observable`, it fail then all fail, sucssess on the contrary | follow the rule of`Reactive Streams`,`onSubscribe (onComplete/onError)` |
-|`Maybe`| none | added in`2.X`, like`Observable`, may has a data, an error or nothing. We can use it to send NULL follow the rule of`Reactive Streams`,`onSubscribe (onSuccess/onError/onComplete)` |
+|`Maybe`| none | added in`2.X`, like`Observable`, may has a data, an error or nothing. We can use it to send `null` follow the rule of`Reactive Streams`,`onSubscribe (onSuccess/onError/onComplete)` |
 |`Flowable`| none | added in`2.X`, like`Observable`, follow the rule of`Reactive Streams`, `onSubscribe(onSuccess/onError)`，support`Backpressure` |
 |`Subject`| `AsyncSubject`<br>`BehaviorSubject`<br>`PublishSubject`<br>`ReplaySubject`<br>`UnicastSubject` | `2.X`still suport the function of`Subject`and add following stuff<br>`AsyncProcessor`<br>`BehaviorProcessor`<br>`PublishProcessor`<br>`ReplayProcessor`<br>`UnicastProcessor`<br>support`Backpressure` |
 |`Subscriber`| `Subscriber` | naming conflict with `Reactive Streams`, `Subscriber`already rename to`Disposable` |
