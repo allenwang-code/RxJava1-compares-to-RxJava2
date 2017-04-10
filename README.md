@@ -4,15 +4,15 @@
 | ----- | ----- | ----- |
 |`package`| `rx.xxx` | `io.reactivex.xxx` |
 | [Reactive Streams rules](http://www.reactive-streams.org/) | `1.X` is before `Reactive Streams`, so it only support apart  | totally support |
-|[Backpressure](https://github.com/ReactiveX/RxJava/wiki/Backpressure)|partly support|`Oberservable` not support<br> add `Flowable`支持背压|
+|[Backpressure](https://github.com/ReactiveX/RxJava/wiki/Backpressure)|partly support|`Oberservable` not support<br> add `Flowable` to support backpressure|
 |`null`| support | do not support `null`, if send `null` to it, will cause `NullPointerException` |
-|`Schedulers`线程调度器| `Schedulers.immediate()`<br>`Schedulers.trampoline()`<br>`Schedulers.computation()`<br>`Schedulers.newThread()`<br>`Schedulers.io()`<br>`Schedulers.from(executor)`<br>`AndroidSchedulers.mainThread()` | 移除`Schedulers.immediate()`<br>新增`Schedulers.single()`<br>其它未变 |
-|`Single`| 行为类似`Observable`，但只会发射一个`onSuccess`或`onError` | 按照`Reactive Streams`规范重新设计，遵循协议`onSubscribe(onSuccess/onError)` |
-|`Completable`| 行为类似`Observable`，要么全部成功，要么就失败 | 按照`Reactive Streams`规范重新设计，遵循协议`onSubscribe (onComplete/onError)` |
-|`Maybe`| 无 | `2.X`新增，行为类似`Observable`，可能会有一个数据或一个错误，也可能什么都没有。可以将其视为一种返回可空值的方法。这种方法如果不抛出异常的话，将总是会返回一些东西，但是返回值可能为空，也可能不为空。按照`Reactive Streams`规范设计，遵循协议`onSubscribe (onSuccess/onError/onComplete)` |
-|`Flowable`| 无 | `2.X`新增，行为类似`Observable`，按照`Reactive Streams`规范设计，支持背压`Backpressure` |
-|`Subject`| `AsyncSubject`<br>`BehaviorSubject`<br>`PublishSubject`<br>`ReplaySubject`<br>`UnicastSubject` | `2.X`依然维护这些`Subject`现有的功能，并新增：<br>`AsyncProcessor`<br>`BehaviorProcessor`<br>`PublishProcessor`<br>`ReplayProcessor`<br>`UnicastProcessor`<br>支持背压`Backpressure` |
-|`Subscriber`| `Subscriber` | 由于与`Reactive Streams`的命名冲突，`Subscriber`已重命名为`Disposable` |
+|`Schedulers`| `Schedulers.immediate()`<br>`Schedulers.trampoline()`<br>`Schedulers.computation()`<br>`Schedulers.newThread()`<br>`Schedulers.io()`<br>`Schedulers.from(executor)`<br>`AndroidSchedulers.mainThread()` | remove`Schedulers.immediate()`<br>add`Schedulers.single()`<br> |
+|`Single`| The action is like`Observable`, but only launch a`onSuccess`or`onError` | follow the rule of`Reactive Streams`, `onSubscribe(onSuccess/onError)` |
+|`Completable`| The action is like`Observable`, it fail then all fail, sucssess on the contrary | follow the rule of`Reactive Streams`,`onSubscribe (onComplete/onError)` |
+|`Maybe`| none | added in`2.X`, like`Observable`, may has a data, an error or nothing. We can use it to send NULL follow the rule of`Reactive Streams`,`onSubscribe (onSuccess/onError/onComplete)` |
+|`Flowable`| none | added in`2.X`, like`Observable`, follow the rule of`Reactive Streams`, `onSubscribe(onSuccess/onError)`，support`Backpressure` |
+|`Subject`| `AsyncSubject`<br>`BehaviorSubject`<br>`PublishSubject`<br>`ReplaySubject`<br>`UnicastSubject` | `2.X`still suport the function of`Subject`and add following stuff<br>`AsyncProcessor`<br>`BehaviorProcessor`<br>`PublishProcessor`<br>`ReplayProcessor`<br>`UnicastProcessor`<br>support`Backpressure` |
+|`Subscriber`| `Subscriber` | naming conflict with `Reactive Streams`, `Subscriber`already rename to`Disposable` |
 
 
 ## Observer
